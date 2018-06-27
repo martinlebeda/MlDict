@@ -1,0 +1,16 @@
+dict
+.idea/
+libraries/bin/
+libraries/pkg/
+libraries/src/golang.org/
+libraries/src/gopkg.in/
+libraries/src/github.com/fatih/
+libraries/src/github.com/fatih/  
+libraries/src/github.com/fsnotify/
+libraries/src/github.com/hashicorp/  
+libraries/src/github.com/magiconair/  
+libraries/src/github.com/mattn/
+libraries/src/github.com/mitchellh/
+libraries/src/github.com/pelletier/
+libraries/src/github.com/spf13/
+libraries/src/github.com/inconshreveable/
