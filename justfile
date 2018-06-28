@@ -6,10 +6,10 @@
 build: dep
   #!/bin/bash
   cd libraries/src/github.com/martinlebeda/MlDict/
-  go build -ldflags "-s -w" -o ../../../../../dict
+  go build -ldflags "-s -w" -o bin/dict
 
 win: build
-  GOOS=windows go build -ldflags "-s -w" -o ../../../../../dict.exe
+  GOOS=windows go build -ldflags "-s -w" -o bin/dict.exe
 
 # dovnload dependencies
 dep:
@@ -35,7 +35,7 @@ dep:
 
 # copy release binary to ~/bin directory
 install: build
-    cp -v dict ~/bin/
+    cp -v bin/dict ~/bin/
 # TODO Lebeda - install: build test
 #  # README.md
 #  wget -O - 'http://127.0.0.1:39095/quit' || echo ok
