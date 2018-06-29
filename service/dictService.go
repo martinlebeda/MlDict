@@ -42,7 +42,7 @@ func ListDict() []string {
 	db := _OpenDB()
 
 	var result []string
-	rows := _RunSelect(db, "SELECT distinct id_dict from dictionary order by id_dict")
+	rows := _RunSelect(db, "SELECT distinct trim(id_dict) from dictionary order by id_dict")
 	for rows.Next() {
 		var dict string
 		err := rows.Scan(&dict)
@@ -57,11 +57,21 @@ func ListDict() []string {
 	return result
 }
 
-func QueryDict(query string) Data {
+func QueryDict(query string, exact bool, dictionary string) Data {
 	db := _OpenDB()
 
-	queryVar := query + "*"
-	dictQuery := "SELECT dict, key, group_concat(expl, '; ') expl from dictft WHERE key MATCH '" + queryVar + "' group by dict, key order by dict, key, expl"
+	queryVar := "'" + query
+	if exact {
+		queryVar += "'"
+	} else {
+		queryVar += "*'"
+	}
+
+	if dictionary != "" {
+		queryVar += " and dict = '" + dictionary + "'"
+	}
+
+	dictQuery := "SELECT dict, key, group_concat(expl, '; ') expl from dictft WHERE key MATCH " + queryVar + " group by dict, key order by dict, key, expl"
 	rows := _RunSelect(db, dictQuery)
 	var key string
 	var expl string

@@ -33,14 +33,11 @@ func PrintDicts(dicts []string) {
 	for _, dict := range dicts {
 		fmt.Println(dict)
 	}
-	fmt.Println("")
-	fmt.Println("number of dictionaries: ", len(dicts))
-
 }
 
 func PrintResult(result service.Data) {
 	if len(result) == 0 {
-		fmt.Println("Nenalezeno...")
+		fmt.Println("Term not found...")
 	} else {
 		for _, dict := range result {
 			styleHeader.Println(" *", dict.Dict, "* ")

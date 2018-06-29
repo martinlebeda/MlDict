@@ -27,39 +27,24 @@ import (
 )
 
 var dict string
+var exact bool
 
-// TODO Lebeda - document command
 // searchCmd represents the search command
 var searchCmd = &cobra.Command{
 	Use:     "search",
 	Aliases: []string{"find", "s"},
 	Args:    cobra.ExactArgs(1),
-	Short:   "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Short:   "Search dictionaries for a word",
+	Long: `Search dictionary database for a word. For searching use fulltext index in sqlite3 (FT4). 
+Implicit is search for "term*", it is for key starting with term. You can owerride this by '-e' option and search for exact term.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		termout.PrintResult(service.QueryDict(args[0]))
+		termout.PrintResult(service.QueryDict(args[0], exact, dict))
 	},
 }
 
 func init() {
 	rootCmd.AddCommand(searchCmd)
 
-	// Here you will define your flags and configuration settings.
-
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	// searchCmd.PersistentFlags().String("foo", "", "A help for foo")
-
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// searchCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
-
+	searchCmd.Flags().BoolVarP(&exact, "exact", "e", false, "Search for exact term")
 	searchCmd.Flags().StringVarP(&dict, "dict", "d", "", "Select one dictionary")
-	// TODO Lebeda - flag pro slovník
-	// TODO Lebeda - hledat přesný výraz
 }
