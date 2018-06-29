@@ -26,7 +26,6 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// TODO Lebeda - rename to dlist
 // listCmd represents the list command
 var listCmd = &cobra.Command{
 	Use:     "list",

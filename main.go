@@ -26,8 +26,7 @@ func main() {
 	cmd.Execute()
 }
 
-// TODO Lebeda - cmd import [-d]
-// TODO Lebeda - cmd export [-d]
-// TODO Lebeda - cmd init
-// TODO Lebeda - reindex
-// TODO Lebeda - variable dict file
+// TODO Lebeda - cmd import
+// TODO Lebeda - cmd export
+// TODO Lebeda - cmd initdb
+// TODO Lebeda - cmd reindex

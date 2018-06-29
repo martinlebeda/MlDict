@@ -26,6 +26,8 @@ import (
 	"github.com/spf13/cobra"
 )
 
+var dict string
+
 // searchCmd represents the search command
 var searchCmd = &cobra.Command{
 	Use:     "search",

@@ -23,8 +23,7 @@ package service
 import (
 	"database/sql"
 	_ "github.com/mattn/go-sqlite3"
-	"os"
-	"path/filepath"
+	"github.com/spf13/viper"
 )
 
 type Data []Dict
@@ -108,9 +107,8 @@ func _RunSelect(db *sql.DB, dictQuery string) *sql.Rows {
 }
 
 func _OpenDB() *sql.DB {
-	homeDir := os.Getenv("HOME")
-	dbpath := filepath.Join(homeDir, ".dictionary.db")
-	db, err := sql.Open("sqlite3", dbpath)
+	dbFileName := viper.GetString("dbfile")
+	db, err := sql.Open("sqlite3", dbFileName)
 	if err != nil {
 		panic(err)
 	}
