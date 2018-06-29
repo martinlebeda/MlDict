@@ -4,8 +4,6 @@
 
 # build production program
 build: dep
-  #!/bin/bash
-  cd libraries/src/github.com/martinlebeda/MlDict/
   go build -ldflags "-s -w" -o bin/dict
 
 win: build
