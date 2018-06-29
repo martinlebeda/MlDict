@@ -31,6 +31,7 @@ import (
 
 var cfgFile string
 
+// TODO Lebeda - document command
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:   "mldict",
@@ -43,9 +44,9 @@ This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	// Uncomment the following line if your bare application
 	// has an action associated with it:
-	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("ahoj")
-	},
+	//Run: func(cmd *cobra.Command, args []string) {
+	//	fmt.Println("ahoj")
+	//},
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.
@@ -65,12 +66,12 @@ func init() {
 	// will be global for your application.
 	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.mldict.yaml)")
 
-	rootCmd.PersistentFlags().String("dbfile", filepath.Join(os.Getenv("HOME"), ".dictionary.db"), "database file (default is $HOME/.dictionary.db)")
+	rootCmd.PersistentFlags().String("dbfile", filepath.Join(os.Getenv("HOME"), ".dictionary.db"), "database file")
 	viper.BindPFlag("dbfile", rootCmd.PersistentFlags().Lookup("dbfile"))
 
 	// Cobra also supports local flags, which will only run
 	// when this action is called directly.
-	rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	//rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }
 
 // initConfig reads in config file and ENV variables if set.

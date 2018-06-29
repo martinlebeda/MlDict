@@ -28,10 +28,11 @@ import (
 
 var dict string
 
+// TODO Lebeda - document command
 // searchCmd represents the search command
 var searchCmd = &cobra.Command{
 	Use:     "search",
-	Aliases: []string{"srch", "s"},
+	Aliases: []string{"find", "s"},
 	Args:    cobra.ExactArgs(1),
 	Short:   "A brief description of your command",
 	Long: `A longer description that spans multiple lines and likely contains examples
