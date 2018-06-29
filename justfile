@@ -1,13 +1,21 @@
 #@IgnoreInspection BashAddShebang
-# build release binary
-# build: resources
+
+TAG = `date +%Y%m%d`
 
 # build production program
 build: dep
   go build -ldflags "-s -w" -o bin/dict
 
+# build windows version
 win: build
   GOOS=windows go build -ldflags "-s -w" -o bin/dict.exe
+
+# rebuild docs
+docs:
+  gpp -x README.src.md > README.md
+  git add README.md
+  git commit -m 'rebuild docs'
+  git push origin
 
 # dovnload dependencies
 dep:
@@ -27,33 +35,24 @@ dep:
 # test: resources
 #  go test
 
-# make README.md
-# README.md: README.mds
-#  mdpreproc < README.mds > README.md
-
 # copy release binary to ~/bin directory
 install: build
-    cp -v bin/dict ~/bin/
-# TODO Lebeda - install: build test
-#  # README.md
-#  wget -O - 'http://127.0.0.1:39095/quit' || echo ok
-#  sleep 5s
-#  cp -v TodoServe ~/bin/
-#  ~/bin/TodoServe -editor gvim -notepath /home/martin/vimwiki/ukoly &
-#  disown
+  cp -v bin/dict ~/bin/
 
 # clean all temporary files
-# clean:
+clean:
+  rm -f dict dict.exe
 #  rm -f bindata.go TodoServe
 
 # build embeded resources
 # resources: clean
 #  go-bindata resources
 
-#release: install
-#  git tag $(TAG)
-#  git push origin --tags
-#  cp -v -v BioRythm ~/Dropbox/Martin/Projects/BioRythm/BioRythm.Linux.x64.$(TAG)
+# make release and publish them
+release: install docs win
+  git tag {{TAG}}
+  git push origin --tags
+  
 
 # upx
 
