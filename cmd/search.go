@@ -35,8 +35,12 @@ var searchCmd = &cobra.Command{
 	Aliases: []string{"find", "s"},
 	Args:    cobra.ExactArgs(1),
 	Short:   "Search dictionaries for a word",
-	Long: `Search dictionary database for a word. For searching use fulltext index in sqlite3 (FT4). 
-Implicit is search for "term*", it is for key starting with term. You can owerride this by '-e' option and search for exact term.`,
+	Long: `Search dictionary database for a word. 
+
+For searching use fulltext index in sqlite3 (FT4). 
+
+Implicit is search for "term*", it is for key starting with term. 
+You can owerride this by '-e' option and search for exact term.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		termout.PrintResult(service.QueryDict(args[0], exact, dict))
 	},

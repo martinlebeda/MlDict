@@ -1,6 +1,5 @@
-#@IgnoreInspection BashAddShebang
-
 TAG = `date +%Y%m%d`
+GITHUB_TOKEN = bbb4e7b26e057090e0652a518bf48b5709c7ca85
 
 # build production program
 build: dep
@@ -41,7 +40,7 @@ install: build
 
 # clean all temporary files
 clean:
-  rm -f dict dict.exe
+  rm -f bin/*
 #  rm -f bindata.go TodoServe
 
 # build embeded resources
@@ -52,7 +51,14 @@ clean:
 release: install docs win
   git tag {{TAG}}
   git push origin --tags
-  
+  gothub release --user martinlebeda --repo mldict --tag {{TAG}}
+  gothub upload --user martinlebeda --repo mldict --tag {{TAG}} --name "dict.linux.x64" --file bin/dict
+  gothub upload --user martinlebeda --repo mldict --tag {{TAG}} --name "dict.windows.x64.exe" --file bin/dict.exe
+
+  # TODO - add some way to release build
+  #  --name "the wolf of source street" --description "Not a movie, contrary to popular opinion. Still, my first release!" --pre-release
+
+
 
 # upx
 
