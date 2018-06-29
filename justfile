@@ -10,10 +10,10 @@ win: build
   GOOS=windows go build -ldflags "-s -w" -o bin/dict.exe
 
 # rebuild docs
-docs:
+docs: install
   gpp -x README.src.md > README.md
   git add README.md
-  git commit -m 'rebuild docs'
+  git commit -a -m 'rebuild docs'
   git push origin
 
 # dovnload dependencies
